@@ -1,9 +1,46 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, Globe, Send, MapPin, ChevronDown } from 'lucide-react';
+import { toast } from 'sonner';
 
 export const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "7457238e-f59d-4f47-8fe2-13020261d390");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        toast.success("Message sent successfully!");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="relative py-24 px-6 overflow-hidden bg-white dark:bg-[#0a0c0f] transition-colors duration-500">
       {/* Premium Background Elements */}
@@ -55,7 +92,6 @@ export const Contact = () => {
 
           {/* Right Side: Premium Contact Form */}
           <div className="relative group w-full">
-            {/* Ambient Glow behind the card */}
             <div className="absolute -inset-4 bg-blue-500/5 dark:bg-blue-500/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
             
             <div className="relative bg-white dark:bg-[#0d1117]/80 backdrop-blur-3xl border border-slate-200 dark:border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all">
@@ -64,11 +100,13 @@ export const Contact = () => {
                 <div className="h-px flex-1 bg-gradient-to-r from-slate-200 dark:from-white/10 to-transparent" />
               </h3>
               
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-5" onSubmit={handleContactSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label className="text-[10px] text-slate-500 dark:text-[#8b9ab0] uppercase tracking-[0.15em] font-bold ml-1">Full Name</label>
                     <input 
+                      required
+                      name="name"
                       type="text" 
                       placeholder="John Doe"
                       className="w-full bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#4a5568] focus:border-blue-500/50 focus:bg-white dark:focus:bg-white/[0.06] focus:ring-1 focus:ring-blue-500/20 outline-none transition-all duration-300"
@@ -77,6 +115,8 @@ export const Contact = () => {
                   <div className="space-y-1.5">
                     <label className="text-[10px] text-slate-500 dark:text-[#8b9ab0] uppercase tracking-[0.15em] font-bold ml-1">Work Email</label>
                     <input 
+                      required
+                      name="email"
                       type="email" 
                       placeholder="john@company.com"
                       className="w-full bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#4a5568] focus:border-blue-500/50 focus:bg-white dark:focus:bg-white/[0.06] focus:ring-1 focus:ring-blue-500/20 outline-none transition-all duration-300"
@@ -87,7 +127,7 @@ export const Contact = () => {
                 <div className="space-y-1.5 relative">
                   <label className="text-[10px] text-slate-500 dark:text-[#8b9ab0] uppercase tracking-[0.15em] font-bold ml-1">Inquiry Type</label>
                   <div className="relative group/select">
-                    <select className="w-full bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-sm text-slate-900 dark:text-white focus:border-blue-500/50 focus:bg-white dark:focus:bg-white/[0.06] outline-none transition-all duration-300 appearance-none cursor-pointer">
+                    <select name="inquiry_type" className="w-full bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-sm text-slate-900 dark:text-white focus:border-blue-500/50 focus:bg-white dark:focus:bg-white/[0.06] outline-none appearance-none cursor-pointer">
                       <option className="bg-white dark:bg-[#0a0c0f]">General Question</option>
                       <option className="bg-white dark:bg-[#0a0c0f]">Early Interest / Beta</option>
                       <option className="bg-white dark:bg-[#0a0c0f]">Business Partnership</option>
@@ -99,15 +139,20 @@ export const Contact = () => {
                 <div className="space-y-1.5">
                   <label className="text-[10px] text-slate-500 dark:text-[#8b9ab0] uppercase tracking-[0.15em] font-bold ml-1">Message</label>
                   <textarea 
+                    required
+                    name="message"
                     rows={4}
                     placeholder="How can we help your workflow?"
                     className="w-full bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#4a5568] focus:border-blue-500/50 focus:bg-white dark:focus:bg-white/[0.06] focus:ring-1 focus:ring-blue-500/20 outline-none transition-all duration-300 resize-none"
                   />
                 </div>
 
-                <button className="group/btn w-full bg-[#2563eb] hover:bg-blue-700 text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-3 text-[13px] uppercase tracking-widest transition-all duration-300 shadow-[0_10px_30px_rgba(37,99,235,0.3)] active:scale-[0.98]">
-                  Send Message
-                  <Send size={16} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                <button 
+                  disabled={isSubmitting}
+                  className="group/btn w-full bg-[#2563eb] hover:bg-blue-700 disabled:bg-blue-400 text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-3 text-[13px] uppercase tracking-widest transition-all duration-300 shadow-[0_10px_30px_rgba(37,99,235,0.3)] active:scale-[0.98]"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                  <Send size={16} className={`${isSubmitting ? 'hidden' : 'group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1'} transition-transform`} />
                 </button>
               </form>
             </div>
