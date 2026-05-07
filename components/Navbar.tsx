@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link'; // Import Next.js Link
-import { usePathname, useRouter } from 'next/navigation'; // Added for cross-page navigation
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { ShimmerButton } from './ui/shimmer-button';
+import { ThemeToggle } from './ThemeToggle'; // Import your ThemeToggle
 
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,20 +35,16 @@ export const Navbar = () => {
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: { type: string; href: string; }) => {
         if (link.type === "scroll") {
             e.preventDefault();
-            
-            // If we are NOT on the home page, redirect to home first
             if (pathname !== "/") {
                 router.push(`/#${link.href}`);
                 setIsOpen(false);
                 return;
             }
-
-            // If we ARE on the home page, scroll smoothly
-            const targetId = link.href === "/" ? "hero" : link.href; // Assuming your Hero section has id="hero"
+            const targetId = link.href === "" || link.href === "/" ? "hero" : link.href;
             const element = document.getElementById(targetId);
             
             if (element) {
-                const offset = 80; // Height of your navbar
+                const offset = 80;
                 const bodyRect = document.body.getBoundingClientRect().top;
                 const elementRect = element.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
@@ -67,7 +64,7 @@ export const Navbar = () => {
             <nav
                 className={`fixed top-0 left-0 right-0 z-[110] transition-all duration-500 ${
                     scrolled || isOpen
-                        ? "bg-[#0a0c0f]/80 backdrop-blur-2xl border-b border-white/10"
+                        ? "bg-white/80 dark:bg-[#0a0c0f]/80 backdrop-blur-2xl border-b border-black/5 dark:border-white/10"
                         : "bg-transparent border-b border-transparent"
                 }`}
             >
@@ -83,36 +80,44 @@ export const Navbar = () => {
                                 sizes="(max-width: 768px) 40px, 36px"
                             />
                         </div>
-                        <span className="font-syne font-bold text-white text-[17px] tracking-tight">
+                        <span className="font-syne font-bold text-slate-900 dark:text-white text-[17px] tracking-tight">
                             Adjuster<span className="text-blue-500 group-hover:text-blue-400">Assist</span>
                         </span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-10">
+                    <div className="hidden md:flex items-center gap-8">
                         <div className="flex items-center gap-8">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.type === "scroll" ? `/#${link.href}` : link.href}
                                     onClick={(e) => handleNavClick(e as never, link)}
-                                    className="text-[13px] text-[#8b9ab0] hover:text-white transition-all duration-300 font-medium tracking-wide relative group"
+                                    className="text-[13px] text-slate-600 dark:text-[#8b9ab0] hover:text-blue-500 dark:hover:text-white transition-all duration-300 font-medium tracking-wide relative group"
                                 >
                                     {link.name}
                                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blue-500 transition-all duration-300 group-hover:w-full" />
                                 </Link>
                             ))}
                         </div>
-                        <ShimmerButton>Coming Soon</ShimmerButton>
+                        
+                        {/* Action Area with Theme Toggle */}
+                        <div className="flex items-center gap-4 pl-6 border-l border-black/5 dark:border-white/10">
+                            <ThemeToggle />
+                            <ShimmerButton>Coming Soon</ShimmerButton>
+                        </div>
                     </div>
 
                     {/* Mobile Toggle Button */}
-                    <button
-                        className="md:hidden relative z-[120] p-2 text-white transition-transform active:scale-90"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {isOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
-                    </button>
+                    <div className="flex md:hidden items-center gap-4">
+                        <ThemeToggle />
+                        <button
+                            className="relative z-[120] p-2 text-slate-900 dark:text-white transition-transform active:scale-90"
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+                            {isOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
+                        </button>
+                    </div>
                 </div>
             </nav>
 
@@ -122,7 +127,7 @@ export const Navbar = () => {
                     isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                 }`}
             >
-                <div className="absolute inset-0 bg-[#0a0c0f]/98 backdrop-blur-3xl" onClick={() => setIsOpen(false)} />
+                <div className="absolute inset-0 bg-white/98 dark:bg-[#0a0c0f]/98 backdrop-blur-3xl" onClick={() => setIsOpen(false)} />
 
                 <div className="relative h-full flex flex-col justify-center px-8">
                     <div className="flex flex-col gap-6">
@@ -131,7 +136,7 @@ export const Navbar = () => {
                                 key={link.name}
                                 href={link.type === "scroll" ? `/#${link.href}` : link.href}
                                 onClick={(e) => handleNavClick(e as never, link)}
-                                className={`text-4xl font-syne font-bold text-white transition-all duration-500 transform ${
+                                className={`text-4xl font-syne font-bold text-slate-900 dark:text-white transition-all duration-500 transform ${
                                     isOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                                 }`}
                                 style={{ transitionDelay: `${i * 100}ms` }}

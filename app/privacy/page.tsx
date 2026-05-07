@@ -20,35 +20,34 @@ const infoItems = [
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-[#0a0c0f] overflow-x-hidden">
+    <main className="min-h-screen bg-white dark:bg-[#0a0c0f] transition-colors duration-500 overflow-x-hidden">
       <Navbar />
 
       {/* HERO */}
       <section className="relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-14 sm:pb-20">
-        {/* Glow */}
-        <div className="pointer-events-none absolute left-1/2 top-0 h-[260px] w-full max-w-[900px] -translate-x-1/2 bg-blue-600/10 blur-3xl" />
+        {/* Dynamic Glow */}
+        <div className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-full max-w-[900px] -translate-x-1/2 bg-blue-500/10 dark:bg-blue-600/10 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 dark:bg-blue-500/10 px-4 py-2">
             <Shield
               size={14}
-              className="text-blue-400 shrink-0"
+              className="text-blue-600 dark:text-blue-400  shrink-0"
               aria-hidden="true"
             />
-
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-blue-400">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-blue-600 dark:text-blue-400">
               Legal Documentation
             </span>
           </div>
 
           {/* Title */}
-          <h1 className="font-syne text-2xl font-extrabold leading-tight text-white sm:text-5xl md:text-6xl">
+          <h1 className="font-syne text-3xl font-extrabold leading-tight text-slate-900 dark:text-white sm:text-5xl md:text-6xl">
             Privacy Policy
           </h1>
 
           {/* Effective Date */}
-          <p className="mt-5 text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-white/70">
+          <p className="mt-5 text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-slate-800 dark:text-white/50">
             Effective Date: May 6, 2026
           </p>
         </div>
@@ -59,30 +58,31 @@ export default function PrivacyPage() {
         <div className="mx-auto max-w-5xl">
           <article
             className="
-              rounded-[2rem]
-              border border-white/10
-              bg-[#131820]/60
-              backdrop-blur-md
-              p-5
-              sm:p-8
-              md:p-12
-              lg:p-16
-              shadow-2xl
+              rounded-[2.5rem]
+              border border-slate-300 dark:border-white/10
+              bg-white/50 dark:bg-[#131820]/60
+              backdrop-blur-xl
+              p-6
+              sm:p-10
+              md:p-16
+              lg:p-20
+              shadow-xl dark:shadow-2xl
+              transition-all duration-500
             "
           >
             {/* Intro */}
-            <div className="mb-14 border-l-2 border-blue-500/40 pl-5 sm:pl-6">
-              <p className="italic leading-7 sm:leading-8 text-sm sm:text-base text-[#a8b3c7]">
+            <div className="mb-14 border-l-4 border-blue-500/40 pl-6 sm:pl-8">
+              <p className="italic leading-relaxed text-sm sm:text-base text-slate-800 dark:text-[#a8b3c7]">
                 AdjusterAssist LLC (“AdjusterAssist,” “we,” “our,” or “us”)
                 respects your privacy and is committed to protecting personal
                 information collected through our website, products, and related
-                services.<br />
+                services.<br /><br />
                 This Privacy Policy explains how we may collect, use, disclose, and safeguard information when you visit our
                 website, contact us, create an account, use our services, or otherwise interact with us.
               </p>
             </div>
 
-            <div className="space-y-14 sm:space-y-16">
+            <div className="space-y-16 sm:space-y-20">
               {/* SECTION TEMPLATE */}
               <PolicySection number="01" title="Who we are">
                 <p>
@@ -97,27 +97,23 @@ export default function PrivacyPage() {
                 number="02"
                 title="Information we may collect"
               >
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <InfoBlock
                     title="Contact information"
                     text="Name, email address, company name, phone number, and other information you provide when contacting us or submitting a form."
                   />
-
                   <InfoBlock
                     title="Account information"
                     text="Login credentials, subscription details, billing-related records, and account preferences if and when you create an account."
                   />
-
                   <InfoBlock
                     title="Usage information"
                     text="Information about how you interact with our website or services, including device information, browser type, IP address, pages viewed, session activity, referral source, and approximate location derived from IP address."
                   />
-
                   <InfoBlock
                     title="Content you submit"
                     text="Information, text, prompts, files, or other materials you choose to provide when using our services."
                   />
-
                   <InfoBlock
                     title="Communications"
                     text="Messages you send to us, support requests, and related correspondence."
@@ -126,29 +122,27 @@ export default function PrivacyPage() {
               </PolicySection>
 
               <PolicySection number="03" title="How we use information">
-                <p className="mb-5">
+                <p className="mb-6 font-medium text-slate-800 dark:text-slate-200">
                   We may use information to:
                 </p>
-
-                <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   {infoItems.map((item, index) => (
                     <li
                       key={index}
                       className="
                         flex items-start gap-3
                         rounded-2xl
-                        border border-white/10
-                        bg-white/5
-                        p-4
+                        border border-slate-300 dark:border-white/10
+                        bg-slate-50/50 dark:bg-white/5
+                        p-4 transition-colors hover:border-blue-500/30
                       "
                     >
                       <ChevronRight
                         size={16}
-                        className="mt-0.5 shrink-0 text-blue-400"
+                        className="mt-1 shrink-0 text-blue-500 dark:text-blue-400"
                         aria-hidden="true"
                       />
-
-                      <span className="text-sm leading-6 text-[#a8b3c7]">
+                      <span className="text-sm leading-6 text-slate-800 dark:text-[#a8b3c7]">
                         {item}
                       </span>
                     </li>
@@ -162,7 +156,7 @@ export default function PrivacyPage() {
               >
                 <p>
                   Our services may use third-party providers, including cloud hosting, authentication, analytics, payment
-                  processors, and AI-related service providers, to help deliver functionality.<br />
+                  processors, and AI-related service providers, to help deliver functionality.<br /><br />
                   Information submitted by users may be processed by these service providers as necessary to operate the
                   service. Users are responsible for ensuring they have the appropriate authority to submit any information they
                   provide to the platform.
@@ -173,7 +167,7 @@ export default function PrivacyPage() {
                 number="05"
                 title="How we may share information"
               >
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {[
                     "with service providers performing functions on our behalf",
                     "with professional advisors such as legal, accounting, or compliance advisors",
@@ -181,17 +175,18 @@ export default function PrivacyPage() {
                     "when required by law, subpoena, court order, or legal process",
                     "when necessary to protect rights, safety, security, or prevent fraud",
                   ].map((item, i) => (
-                    <p key={i}>• {item}</p>
+                    <p key={i} className="flex gap-2">
+                      <span className="text-blue-500">•</span> {item}
+                    </p>
                   ))}
-
-                  <p className="pt-4 font-semibold uppercase tracking-wide text-white">
+                  <p className="pt-6 font-bold uppercase tracking-wider text-slate-900 dark:text-white text-sm">
                     We do not sell personal information.
                   </p>
                 </div>
               </PolicySection>
 
               <PolicySection number="06" title="Data retention">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <p>
                     We retain information for as long as reasonably necessary to:
                   </p>
@@ -202,9 +197,11 @@ export default function PrivacyPage() {
                     "enforce agreements",
                     "comply with legal obligations",
                   ].map((item, i) => (
-                    <p key={i}>• {item}</p>
+                    <p key={i} className="flex gap-2">
+                      <span className="text-blue-500">•</span> {item}
+                    </p>
                   ))}
-                  <p>Retention periods may vary depending on the nature of the information and the purpose for which it was collected.</p>
+                  <p className="mt-4 italic opacity-80">Retention periods may vary depending on the nature of the information and the purpose for which it was collected.</p>
                 </div>
               </PolicySection>
 
@@ -217,7 +214,7 @@ export default function PrivacyPage() {
               </PolicySection>
 
               <PolicySection number="08" title="Your choices">
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <p>
                     You may contact us to:
                   </p>
@@ -227,9 +224,11 @@ export default function PrivacyPage() {
                     "request deletion of information where appropriate",
                     "opt out of non-essential communications",
                   ].map((item, i) => (
-                    <p key={i}>• {item}</p>
+                    <p key={i} className="flex gap-2">
+                      <span className="text-blue-500">•</span> {item}
+                    </p>
                   ))}
-                  <p>We may need to retain certain information where required for legal, security, contractual, or operational reasons.</p>
+                  <p className="mt-4 italic opacity-80">We may need to retain certain information where required for legal, security, contractual, or operational reasons.</p>
                 </div>
               </PolicySection>
 
@@ -248,13 +247,12 @@ export default function PrivacyPage() {
               </PolicySection>
 
               {/* Highlight Box */}
-              <section className="rounded-3xl border border-blue-500/20 bg-blue-500/5 p-5 sm:p-8">
+              <section className="rounded-3xl border border-blue-500/20 bg-blue-500/5 dark:bg-blue-500/10 p-6 sm:p-10 transition-colors">
                 <SectionHeading
                   number="11"
                   title="Professional-use notice"
                 />
-
-                <p className="mt-5 text-sm sm:text-base leading-7 text-[#a8b3c7]">
+                <p className="mt-6 text-sm sm:text-base leading-relaxed text-slate-800 dark:text-[#a8b3c7]">
                   AdjusterAssist is intended for professional and business use. It is not legal advice, not insurance coverage
                   advice, and not a claim determination service. Users remain responsible for their own professional decisions,
                   compliance obligations, and final work product.
@@ -270,19 +268,19 @@ export default function PrivacyPage() {
               </PolicySection>
 
               <PolicySection number="13" title="Contact us">
-                <p>If you have questions about this Privacy Policy, you may contact us at</p>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
-                  <p className="font-semibold text-white">
+                <p className="mb-6">If you have questions about this Privacy Policy, you may contact us at</p>
+                <div className="rounded-2xl border border-slate-300 dark:border-white/10 bg-slate-100 dark:bg-white/5 p-6 sm:p-8">
+                  <p className="font-bold text-slate-900 dark:text-white text-lg">
                     AdjusterAssist LLC
                   </p>
-
-                  <p className="mt-2 break-all">
-                    Email: info@adjusterassistapp.com
-                  </p>
-
-                  <p className="break-all">
-                    Website: adjusterassistapp.com
-                  </p>
+                  <div className="mt-4 space-y-2 text-slate-800 dark:text-[#a8b3c7]">
+                    <p className="break-all flex items-center gap-2">
+                      <span className="font-semibold text-blue-500">Email:</span> info@adjusterassistapp.com
+                    </p>
+                    <p className="break-all flex items-center gap-2">
+                      <span className="font-semibold text-blue-500">Website:</span> adjusterassistapp.com
+                    </p>
+                  </div>
                 </div>
               </PolicySection>
             </div>
@@ -305,11 +303,10 @@ function SectionHeading({
   title: string;
 }) {
   return (
-    <h2 className="flex items-center gap-3 text-xl sm:text-2xl font-bold text-white">
-      <span className="font-mono text-xs sm:text-sm text-blue-400">
+    <h2 className="flex items-center gap-4 text-xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+      <span className="font-mono text-sm sm:text-base text-blue-600 dark:text-blue-400">
         {number}.
       </span>
-
       <span className="font-syne leading-tight">
         {title}
       </span>
@@ -327,10 +324,9 @@ function PolicySection({
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <section className="scroll-mt-32">
       <SectionHeading number={number} title={title} />
-
-      <div className="mt-5 text-sm sm:text-base leading-7 sm:leading-8 text-[#a8b3c7]">
+      <div className="mt-6 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-[#a8b3c7]">
         {children}
       </div>
     </section>
@@ -345,12 +341,11 @@ function InfoBlock({
   text: string;
 }) {
   return (
-    <div>
-      <h3 className="mb-2 text-base sm:text-lg font-semibold text-white">
+    <div className="group">
+      <h3 className="mb-2 text-base sm:text-lg font-bold text-slate-800 dark:text-white group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
         {title}
       </h3>
-
-      <p className="text-sm sm:text-base leading-7 text-[#a8b3c7]">
+      <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-[#a8b3c7]">
         {text}
       </p>
     </div>

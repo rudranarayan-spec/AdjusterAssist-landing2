@@ -5,57 +5,63 @@ import { Send } from 'lucide-react';
 import { toast } from 'sonner';
 
 export const CTA = () => {
-    const handleNotify = () => {
-        toast.success("Thanks for your interest! We'll notify you when we launch.");
-    };
+  const handleNotify = () => {
+    toast.success("Thanks for your interest! We'll notify you when we launch.");
+  };
+
   return (
-    <section className="relative px-6 py-15 overflow-hidden">
-      {/* Background Glows for Depth */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-600/10 blur-[140px] rounded-full pointer-events-none" />
+    /* ADDED: bg-white dark:bg-transparent to fix the black background issue */
+    <section className="relative px-6 py-24 overflow-hidden bg-white dark:bg-transparent transition-colors duration-500">
+      
+      {/* Background Glows for Depth - Adaptive Opacity */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[400px] bg-blue-500/10 dark:bg-blue-600/10 blur-[100px] sm:blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative group">
         {/* Animated Border Gradient (The "Premium" Shimmer) */}
-        <div className="absolute -inset-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-[2.5rem] opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
+        <div className="absolute -inset-[1px] bg-gradient-to-r from-transparent via-blue-500/20 dark:via-white/20 to-transparent rounded-[2.5rem] opacity-30 dark:opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
         
-        {/* Main Card */}
-        <div className="relative bg-[#0d1117]/80 backdrop-blur-2xl border border-white/5 rounded-[2.5rem] p-8 md:p-16 text-center overflow-hidden">
+        {/* Main Card - Adaptive Background and Border */}
+        <div className="relative bg-white/70 dark:bg-[#0d1117]/80 backdrop-blur-2xl border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-8 md:p-16 text-center overflow-hidden shadow-2xl shadow-blue-500/5 dark:shadow-none transition-all duration-500">
           
           {/* Internal Radial Decoration */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.08),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.05),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.08),transparent_50%)]" />
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full mb-8 relative z-10 transition-transform group-hover:scale-105">
             <div className="w-1.5 h-1.5 rounded-full bg-[#f59e0b] animate-pulse shadow-[0_0_8px_#f59e0b]" />
-            <span className="text-[10px] text-amber-500 uppercase tracking-[0.2em] font-bold">
+            <span className="text-[10px] text-amber-600 dark:text-amber-500 uppercase tracking-[0.2em] font-bold">
               Public Launch Incoming
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="font-syne font-extrabold text-3xl md:text-5xl text-white mb-6 tracking-tight relative z-10">
+          <h2 className="font-syne font-extrabold text-3xl md:text-5xl text-slate-900 dark:text-white mb-6 tracking-tight relative z-10 transition-colors">
             Be first to know <br className="hidden sm:block" />
-            <span className="text-blue-500">when we ship.</span>
+            <span className="text-blue-600 dark:text-blue-500">when we ship.</span>
           </h2>
 
           {/* Subtext */}
-          <p className="max-w-lg mx-auto text-[#8b9ab0] text-sm md:text-base mb-12 font-light leading-relaxed relative z-10">
+          <p className="max-w-lg mx-auto text-slate-600 dark:text-[#8b9ab0] text-sm md:text-base mb-12 font-light leading-relaxed relative z-10 transition-colors">
             AdjusterAssist™ is in active development. Join our early notification list to receive updates on features, availability, and launch pricing.
           </p>
 
           {/* Premium Input Row */}
           <div className="max-w-md mx-auto relative z-10">
-            <div className="flex flex-col sm:flex-row gap-3 p-2 bg-white/[0.03] border border-white/10 rounded-2xl sm:rounded-full focus-within:border-blue-500/50 transition-all duration-500 group/input">
+            <div className="flex flex-col sm:flex-row gap-3 p-2 bg-slate-100/50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl sm:rounded-full focus-within:border-blue-500/50 focus-within:bg-white dark:focus-within:bg-[#0d1117] transition-all duration-500 group/input shadow-inner">
               <input 
                 type="email" 
                 placeholder="Enter your professional email" 
-                className="flex-1 bg-transparent border-none outline-none px-4 py-3 text-sm text-white placeholder:text-[#4a5568] focus:ring-0"
+                className="flex-1 bg-transparent border-none outline-none px-4 py-3 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#4a5568] focus:ring-0"
               />
-              <button onClick={handleNotify} className="bg-white text-black hover:bg-blue-600 hover:text-white px-8 py-3 rounded-xl sm:rounded-full text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-white/5">
+              <button 
+                onClick={handleNotify} 
+                className="bg-slate-900 dark:bg-white text-white dark:text-black hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white px-8 py-3 rounded-xl sm:rounded-full text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 shadow-lg shadow-slate-900/10 dark:shadow-white/5"
+              >
                 Notify Me
                 <Send size={14} className="group-hover/input:translate-x-1 group-hover/input:-translate-y-1 transition-transform" />
               </button>
             </div>
-            <p className="mt-4 text-[10px] text-[#4a5568] uppercase tracking-widest font-medium">
+            <p className="mt-4 text-[10px] text-slate-400 dark:text-[#4a5568] uppercase tracking-widest font-medium transition-colors">
               Professional use only • No spam
             </p>
           </div>
