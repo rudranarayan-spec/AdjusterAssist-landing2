@@ -19,7 +19,7 @@ export const Hero = () => {
         <div className="mb-6 flex justify-center">
           <div
             className="
-      max-w-3xl
+      max-w-4xl
       rounded-2xl
       border border-amber-200/60 dark:border-amber-500/20
       bg-amber-50/80 dark:bg-amber-500/5
