@@ -94,7 +94,7 @@ export const About = () => {
             </div>
             <div className="flex flex-col items-center gap-3">
               <ShinyButton className="px-6 py-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white font-bold text-sm shadow-sm">
-                Active Build v1.5.2
+                Development Build v1.8.2
               </ShinyButton>
               <span className="text-[10px] text-slate-400 dark:text-[#8b9ab0] uppercase tracking-widest">Awaiting Launch</span>
             </div>
