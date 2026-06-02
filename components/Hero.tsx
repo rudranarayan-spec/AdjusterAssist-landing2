@@ -6,7 +6,7 @@ export const Hero = () => {
 
       {/* Premium Background Layers */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-40 pointer-events-none" />
-      
+
       {/* Dynamic Radial Gradient for Light/Dark */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(59,130,246,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_-20%,rgba(59,130,246,0.15),transparent_70%)] pointer-events-none" />
 
@@ -14,6 +14,30 @@ export const Hero = () => {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] sm:w-[600px] h-[300px] bg-blue-500/10 dark:bg-blue-600/10 blur-[80px] sm:blur-[120px] rounded-full pointer-events-none animate-pulse" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
+
+        {/* Private Development Notice */}
+        <div className="mb-6 flex justify-center">
+          <div
+            className="
+      max-w-3xl
+      rounded-2xl
+      border border-amber-200/60 dark:border-amber-500/20
+      bg-amber-50/80 dark:bg-amber-500/5
+      px-5 py-3
+      backdrop-blur-sm
+      shadow-sm
+    "
+          >
+            <p className="text-xs sm:text-sm text-amber-800 dark:text-amber-200 leading-relaxed">
+              <span className="font-semibold">
+                Private Development Notice:
+              </span>{" "}
+              AdjusterAssist™ is currently in private development. The platform is intended
+              to support professional claim documentation, workflow organization, and
+              communication drafting. Public access is not currently available.
+            </p>
+          </div>
+        </div>
 
         {/* Development Badge */}
         <div className="inline-flex items-center gap-2.5 bg-slate-50 dark:bg-[#131820] border border-slate-200 dark:border-white/10 rounded-full px-5 py-2 mb-10 shadow-xl dark:shadow-2xl shadow-blue-500/5 hover:border-blue-300 dark:hover:border-white/20 transition-all group cursor-default">

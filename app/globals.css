@@ -231,7 +231,7 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
+  data-scroll-behavior: smooth;
   scroll-padding-top: 80px; /* This prevents the Navbar from covering the section title */
 }
 
