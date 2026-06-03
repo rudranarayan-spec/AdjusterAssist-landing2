@@ -51,7 +51,30 @@ export const Footer = () => {
               © 2026 AdjusterAssist LLC. All rights reserved.
             </p>
 
-            <div className="inline-flex items-center gap-2 mt-1 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+
+          </div>
+
+          {/* Links */}
+          <div>
+
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+              {['Privacy Policy', 'Terms of Service', 'Contact Support'].map((link) => (
+                <a
+                  key={link}
+                  href={
+                    link === 'Privacy Policy'
+                      ? '/privacy'
+                      : link === 'Terms of Service'
+                        ? '/terms'
+                        : '#'
+                  }
+                  className="text-[11px] font-bold text-slate-500 dark:text-[#4a5568] hover:text-blue-600 dark:hover:text-blue-400 uppercase tracking-widest transition-all"
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
+            <div className="inline-flex items-center gap-2 mt-1 px-3 py-3 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10">
               <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
               <span className="text-[10px] uppercase tracking-[0.15em] font-semibold text-slate-500 dark:text-[#64748B]">
                 Private Development • Public access is not available at this time.
@@ -59,18 +82,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Links */}
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-            {['Privacy Policy', 'Terms of Service', 'Contact Support'].map((link) => (
-              <a
-                key={link}
-                href={link === 'Privacy Policy' ? '/privacy' : '#'}
-                className="text-[11px] font-bold text-slate-500 dark:text-[#4a5568] hover:text-blue-600 dark:hover:text-blue-400 uppercase tracking-widest transition-all"
-              >
-                {link}
-              </a>
-            ))}
-          </div>
+
         </div>
       </div>
     </footer>
